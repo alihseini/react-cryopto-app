@@ -2,11 +2,11 @@ import { RotatingLines } from "react-loader-spinner";
 import TableRow from "./TableRow";
 import styles from "./Table.module.css"
 
-function Table({ data, isLoading }) {
+function Table({ data, isLoading , currency}) {
   return (
     <div className={styles.container}>
       {isLoading ? (
-        <RotatingLines strokeColor="grey" strokeWidth="2" />
+        <RotatingLines strokeColor="#533740" strokeWidth="2" />
       ) : (
         <table className={styles.table}>
           <thead>
@@ -21,7 +21,7 @@ function Table({ data, isLoading }) {
           </thead>
           <tbody>
             {data.map((coin) => (
-              <TableRow coin={coin} key={coin.id} />
+              <TableRow coin={coin} key={coin.id} currency={currency} />
             ))}
           </tbody>
         </table>
