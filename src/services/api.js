@@ -9,4 +9,8 @@ const searchApi = (query) => {
   return `${BASE_URL}/search?query=${query}&x_cg_api_key=${API_KEY}`;
 };
 
-export { getApi, searchApi };
+const chartApi = (id) => {
+  return `${BASE_URL}/coins/${id}/market_chart?vs_currency=usd&days=7`;
+};
+
+export { getApi, searchApi, chartApi };

@@ -55,11 +55,16 @@
 }
 
 .searchList ul li{
-    width: 90%;
+    width: 250px;
+    padding: 10px 10px;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 20px;
-    margin: 5px auto;
+    list-style-type: none;
     border-bottom: #9695955b 1px solid;
+}
+
+.searchList ul li img{
+    height: 30px;
+    width: 30px;
 }

@@ -1,0 +1,16 @@
+.h1{
+    width: auto;
+    margin: 10px;
+    background-color: #c44569;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.footer{
+    background-color: #5337408a;
+    padding: 7px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

@@ -7,8 +7,10 @@ function Search({ currency, setCurrency }) {
   const [query, setQuery] = useState("");
   const [searchedData, setSearchedData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    setError("");
     setSearchedData([]);
     if (!query) {
       setIsLoading(false);
@@ -21,12 +23,17 @@ function Search({ currency, setCurrency }) {
           signal: controller.signal,
         });
         const result = await response.json();
-        result
-          ? setSearchedData(result.coins) & setIsLoading(false)
-          : alert(result.status.error_message);
+        if (!result.status) {
+          setSearchedData(result.coins);
+          setIsLoading(false);
+        } else {
+          setError("Something went wrong! Please try again later.");
+          setIsLoading(false);
+        }
       } catch (error) {
         if (error.name !== "AbortError") {
-          alert(error);
+          setError("Something went wrong! Please try again later.");
+          setIsLoading(false);
         }
       }
     };
@@ -48,7 +55,7 @@ function Search({ currency, setCurrency }) {
         <option value="eur">EUR</option>
         <option value="jpy">JPY</option>
       </select>
-      {(!!searchedData.length || isLoading) && (
+      {(!!searchedData.length || isLoading || error) && (
         <div className={styles.searchList}>
           {isLoading && (
             <RotatingLines
@@ -59,12 +66,16 @@ function Search({ currency, setCurrency }) {
             />
           )}
           <ul>
-            {searchedData.map((coin) => (
-              <li key={coin.id}>
-                <img src={coin.thumb} alt={coin.name} />
-                <p>{coin.name}</p>
-              </li>
-            ))}
+            {error ? (
+              <li>{error}</li>
+            ) : (
+              searchedData.map((coin) => (
+                <li key={coin.id}>
+                  <img src={coin.thumb} alt={coin.name} />
+                  <p>{coin.name}</p>
+                </li>
+              ))
+            )}
           </ul>
         </div>
       )}

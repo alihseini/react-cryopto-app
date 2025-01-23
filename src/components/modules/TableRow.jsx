@@ -1,22 +1,31 @@
 import chartDown from "../../assets/chartDown.svg";
 import chartUp from "../../assets/chartUp.svg";
+import { chartApi } from "../../services/api";
 import styles from "./TableRow.module.css";
 
-function TableRow({
-  coin: {
+function TableRow({ coin, currency, setChart }) {
+  const showChartHandler = async () => {
+    try {
+      const responce = await fetch(chartApi(id));
+      const result = await responce.json();
+      setChart({ ...result, coin });
+    } catch (error) {}
+  };
+
+  const {
+    id,
     name,
     symbol,
     image,
     price_change_percentage_24h,
     total_volume,
     current_price,
-  },
-  currency,
-}) {
+  } = coin;
+
   return (
     <tr className={styles.tr}>
       <td>
-        <div className={styles.coin}>
+        <div className={styles.coin} onClick={showChartHandler}>
           <img src={image} alt="coin image" />
           <p>{symbol.toUpperCase()}</p>
         </div>

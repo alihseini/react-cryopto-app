@@ -5,12 +5,13 @@
 
 .coin{
     display: flex;
-    gap: 10px;
+    max-width: fit-content;
+    gap: 10px; 
+    cursor: pointer;
 }
 
 .coin img{
     width: 30px;
-    cursor: pointer;
 }
 
 .success{
